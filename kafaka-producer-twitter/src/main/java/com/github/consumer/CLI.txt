@@ -1,0 +1,16 @@
+Environment  : Ubuntu 18.04
+
+-- Create Topic
+kafka-topics.sh --zookeeper 127.0.0.1:2181 --create --topic twitter_tweets --partitions 6 --replication-factor 1
+
+-- Start Zookeeper
+zookeeper-server-start.sh config/zookeeper.properties
+
+-- Start Kafka
+kafka-server-start.sh config/server.properties
+
+-- Console Consumer
+kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic twitter_tweets
+
+-- Replaying data
+kafka-consumer-groups.sh --bootstrap-server localhost:9092 -group kafka-demo-elasticsearch --reset-offsets --execute --to-earliest --topic twitter_tweets

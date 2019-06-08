@@ -1,0 +1,12 @@
+Environment : Ubuntu 18.04
+
+-- create topic
+kafka-topics.sh --zookeeper 127.0.0.1:2181 -- create --topic twitter_status_connect --partions 3 --replication-factor 1
+
+kafka-topics.sh --zookeeper 127.0.0.1:2181 -- create --topic twitter_deletes_connect --partions 3 --replication-factor 1
+
+-- list topic in kafka
+kafka-topics.sh --zookeeper 127.0.0.1:2181 --list
+
+-- Console Consumer
+kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic twitter_status_connect --from-beginning
